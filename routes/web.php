@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// route Hiển thị màn hình hello
+Route::get('/hello', 'ExampleController@hello');
+// route Hiển thị màn hình goodbye
+Route::get('/goodbye', 'ExampleController@goodbye');
+
+
+Route::get('/today','ExampleController@ngay');
+
+// route hiển thị màn hình Danh sách nhân viên
+Route::get('/example/danhsachnhanvien', 'ExampleController@danhsachnhanvien');
