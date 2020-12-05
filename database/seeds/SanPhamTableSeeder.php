@@ -12,7 +12,7 @@ class SanPhamTableSeeder extends Seeder
     public function run()
     {
         $list = [];
-        $faker = Faker\Factory::create('vi_VN');
+        $faker    = Faker\Factory::create('vi_VN');
         $photos = array('hoahong.jpg','hoalan.jpg','hoatuoi.jpg');
 
         for ($i=1; $i <= 30; $i++) {

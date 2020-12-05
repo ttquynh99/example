@@ -12,15 +12,15 @@ class ThanhToanTableSeeder extends Seeder
     public function run()
     {
         $list = [];
+        $types = ["Tiền Mặt", "Thanh toán khi nhận hàng", "Chuyển khoản"];
+        sort($types);
+        $today = new DateTime('2020-12-01 08:00:00');
 
-        $type = ["Tiền mặt", "Thanh toán khi nhận hàng", "Chuyển khoản"];
-        sort($type);
-        $today = new DateTime('2020-12-01 18:00:00');
-        for($i=1; $i<= count($type); $i++){
-            array_push($list,[
-                'tt_ma'  => $i,
-                'tt_ten' => $type[$i-1],
-                'tt_diengiai' => "Diễn giải",
+        for($i=1; $i <= count($types); $i++) {
+            array_push($list, [
+                'tt_ma'      => $i,
+                'tt_ten'     => $types[$i-1],
+                'tt_dienGiai'  => "abc",
                 'tt_taoMoi'  => $today->format('Y-m-d H:i:s'),
                 'tt_capNhat' => $today->format('Y-m-d H:i:s'),
                 'tt_trangThai' => 1
