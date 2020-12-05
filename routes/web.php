@@ -24,3 +24,7 @@ Route::get('/today','ExampleController@ngay');
 
 // route hiển thị màn hình Danh sách nhân viên
 Route::get('/example/danhsachnhanvien', 'ExampleController@danhsachnhanvien');
+
+//Route test Model
+Route::get('test', 'TestController@getDanhSachLoai');
+Route::get('testsp', 'TestController@getDanhSachSanpham');
