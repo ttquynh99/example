@@ -28,3 +28,11 @@ Route::get('/example/danhsachnhanvien', 'ExampleController@danhsachnhanvien');
 //Route test Model
 Route::get('test', 'TestController@getDanhSachLoai');
 Route::get('testsp', 'TestController@getDanhSachSanpham');
+Route::get('testbackend', function(){
+    return view('test.backend');
+});
+
+Route::get('admin/loai','Backend\LoaiController@index')->name('admin.loai.index');
+
+Route::get('admin/loai/create','Backend\LoaiController@create')->name('admin.loai.create');
+Route::post('admin/loai/store','Backend\LoaiController@store')->name('admin.loai.store');
