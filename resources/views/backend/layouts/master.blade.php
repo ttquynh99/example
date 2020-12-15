@@ -26,6 +26,7 @@
         <div class="row">
             <!-- Sidebar -->
             @include('backend.layouts.partials.sidebar')
+            @include('backend.layouts.partials.errors_massage')
             <!-- End sidebar -->
 
             <!-- Content -->
@@ -44,9 +45,10 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/popperjs/popper.min.js') }}"></script>
+    <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-
+    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+    
     <!-- Các custom script dành riêng cho từng view -->
     @yield('custom-scripts')
   </body>
