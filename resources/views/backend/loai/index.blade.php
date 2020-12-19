@@ -47,7 +47,7 @@ $(function(){
     $('.frmDelete').submit(function(e){
         e.preventDefault();
         var id=$(this).data('id');
-        Swal.fire({
+        swal.fire({
             title: 'Bạn có chắc muốn xóa?',
             text: 'Bạn sẽ không thể phục hồi khi xóa!',
             icon: 'warning',
@@ -75,9 +75,8 @@ $(function(){
                 });
             }
         })
-
-        });
     });
+});
 </script>
     
 @endsection

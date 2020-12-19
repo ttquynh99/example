@@ -41,3 +41,14 @@ Route::get('admin/loai/edit/{id}','Backend\LoaiController@edit')->name('admin.lo
 Route::put('admin/loai/update/{id}','Backend\LoaiController@update')->name('admin.loai.update');
 
 Route::delete('admin/loai/delete/{id}','Backend\LoaiController@destroy')->name('admin.loai.destroy');
+
+
+
+//Route sản phẩm
+
+Route::resource('/admin/sanpham', 'Backend\SanphamController' , ['as' => 'admin']);
+
+
+//Route xuất xứ
+
+Route::resource('/admin/xuatxu', 'Backend\XuatxuController' , ['as' => 'admin']);

@@ -7,6 +7,7 @@
                 Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
+            <!-- Danh sach loai -->
             <li class="nav-item">
                 <a href="#loaiSubMenu" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle {{ (strpos(Route::currentRouteName(), 'admin.loai') === 0) ? 'active' : '' }}">
                     <span data-feather="package"></span> Loại
@@ -16,6 +17,34 @@
                         <a class="nav-link {{ (strpos(Route::currentRouteName(), 'admin.loai.index') === 0) ? 'active' : '' }}" href="{{ route('admin.loai.index') }}/">
                             <span data-feather="list"></span>
                             Danh sách loại
+                        </a>
+                    </li>
+                </ul>
+            </li>
+                <!-- Danh sach san pham -->
+            <li class="nav-item">
+                <a href="#spSubMenu" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle {{ (strpos(Route::currentRouteName(), 'admin.sanpham') === 0) ? 'active' : '' }}">
+                    <span data-feather="package"></span> Sản phẩm
+                </a>
+                <ul class="{{ (strpos(Route::currentRouteName(), 'admin.sanpham') === 0) ? 'collapse show' : 'collapse' }}" id="spSubMenu">
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'admin.sanpham.index') === 0) ? 'active' : '' }}" href="{{ route('admin.sanpham.index') }}/">
+                            <span data-feather="list"></span>
+                            Danh sách sản phẩm
+                        </a>
+                    </li>
+                </ul>
+            </li>
+                    <!-- Danh sach xuat xu -->
+            <li class="nav-item">
+                <a href="#xxSubMenu" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle {{ (strpos(Route::currentRouteName(), 'admin.xuatxu') === 0) ? 'active' : '' }}">
+                    <span data-feather="package"></span> Xuất xứ
+                </a>
+                <ul class="{{ (strpos(Route::currentRouteName(), 'admin.xuatxu') === 0) ? 'collapse show' : 'collapse' }}" id="xxSubMenu">
+                    <li class="nav-item">
+                        <a class="nav-link {{ (strpos(Route::currentRouteName(), 'admin.xuatxu.index') === 0) ? 'active' : '' }}" href="{{ route('admin.xuatxu.index') }}/">
+                            <span data-feather="list"></span>
+                            Danh sách xuất xứ
                         </a>
                     </li>
                 </ul>

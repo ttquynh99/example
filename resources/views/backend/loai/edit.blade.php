@@ -19,6 +19,5 @@
     </select>
   </div>
   <button class="btn btn-primary"> Lưu</button>
-
 </form>
 @endsection
