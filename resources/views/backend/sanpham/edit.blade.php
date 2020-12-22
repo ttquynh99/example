@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-    Them moi san pham
+    Chỉnh sửa sản phẩm
 @endsection
 @section('custom-css')
 <!-- Các css dành cho thư viện bootstrap-fileinput -->
@@ -10,48 +10,53 @@
     <link href="{{ asset('vendor/bootstrap-fileinput/themes/explorer-fas/theme.css') }}" media="all" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
-<form name="frmCreate" id="frmCreate" method="post" action="{{route('admin.sanpham.store')}}" enctype="multipart/form-data">
+<form name="frmEdit" id="frmCreate" method="post" action="{{route('admin.sanpham.update', ['id' => $sp->sp_ma] ) }}" enctype="multipart/form-data">
+<input type="hidden" name="_method" value="PUT" />
   {{ csrf_field() }}
     <div class="form-group">
         <label for="">Tên sản phẩm</label>
-        <input type="text" class="form-control" id="sp_ten" name="sp_ten" value="{{ old('sp_ten')}}">
+        <input type="text" class="form-control" id="sp_ten" name="sp_ten" value="{{ old('sp_ten', $sp->sp_ten) }}">
     </div>
     <div class="form-group">
         <label for="">Giá gốc</label>
-        <input type="text" class="form-control" id="sp_giaGoc" name="sp_giaGoc" value="{{ old('sp_giaGoc')}}">
+        <input type="text" class="form-control" id="sp_giaGoc" name="sp_giaGoc" value="{{ old('sp_giaGoc', $sp->sp_giaGoc)}}">
     </div>
     <div class="form-group">
         <label for="">Giá bán</label>
-        <input type="text" class="form-control" id="sp_giaBan" name="sp_giaBan" value="{{ old('sp_giaBan')}}">
+        <input type="text" class="form-control" id="sp_giaBan" name="sp_giaBan" value="{{ old('sp_giaBan', $sp->sp_giaBan)}}">
     </div>
     <div class="form-group">
         <label for="">Thông tin</label>
-        <input type="text" class="form-control" id="sp_thongTin" name="sp_thongTin" value="{{ old('sp_thongTin')}}">
+        <input type="text" class="form-control" id="sp_thongTin" name="sp_thongTin" value="{{ old('sp_thongTin', $sp->sp_thongTin)}}">
     </div>
     <div class="form-group">
         <label for="">Đánh giá</label>
-        <input type="text" class="form-control" id="sp_danhGia" name="sp_danhGia" value="{{ old('sp_danhGia')}}">
+        <input type="text" class="form-control" id="sp_danhGia" name="sp_danhGia" value="{{ old('sp_danhGia', $sp->sp_danhGia)}}">
     </div>
     <div class="form-group">
-    <div class="form-group">
         <label for="sp_taoMoi">Ngày tạo mới</label>
-        <input type="text" class="form-control" id="sp_taoMoi" name="sp_taoMoi" value="{{ old('sp_taoMoi') }}" data-mask-datetime>
+        <input type="text" class="form-control" id="sp_taoMoi" name="sp_taoMoi" value="{{ old('sp_taoMoi', $sp->sp_taoMoi) }}" data-mask-datetime>
     </div>
     <div class="form-group">
         <label for="sp_capNhat">Ngày cập nhật</label>
-        <input type="text" class="form-control" id="sp_capNhat" name="sp_capNhat" value="{{ old('sp_capNhat') }}" data-mask-datetime>
+        <input type="text" class="form-control" id="sp_capNhat" name="sp_capNhat" value="{{ old('sp_capNhat', $sp->sp_capNhat) }}" data-mask-datetime>
     </div>
+    <div class="form-group">
         <label for="">Trạng thái</label>
             <select name="sp_trangThai" id="sp_trangThai">
-                <option value="1" {{old('sp_trangThai') == 1 ? 'selected' : ''}}>Khóa</option>
-                <option value="2" {{old('sp_trangThai') == 2 ? 'selected' : ''}}>Khả dụng</option>
+            <option value="1" {{ old('sp_trangThai', $sp->sp_trangThai) == 1 ? "selected" : "" }}>Khóa</option>
+            <option value="2" {{ old('sp_trangThai', $sp->sp_trangThai) == 2 ? "selected" : "" }}>Khả dụng</option>
             </select>
     </div>
     <div class="form-group">
         <label for="">Loại sản phẩm</label>
             <select name="l_ma" id="l_ma">
-                @foreach($dsLoai as $loai)
-                <option value="{{ $loai->l_ma }}" >{{$loai->l_ten}}</option>
+                @foreach($ds_loai as $loai)
+                @if($loai->l_ma == $sp->l_ma)
+                <option value="{{ $loai->l_ma }}" selected>{{ $loai->l_ten }}</option>
+                @else
+                <option value="{{ $loai->l_ma }}">{{ $loai->l_ten }}</option>
+                @endif
                 @endforeach
             </select>
     </div>
@@ -60,13 +65,11 @@
         <input type="file" class="form-control" id="sp_hinh" name="sp_hinh" value="{{ old('sp_hinh')}}">
     </div>
     <div class="form-group">
-        <div class="file-loading">
-        <label>Hình ảnh liên quan sản phẩm</label>
-        <input id="sp_hinhanhlienquan" type="file" name="sp_hinhanhlienquan[]" multiple>
-        </div>
-    </div>
-
-
+      <div class="file-loading">
+          <label>Hình ảnh liên quan sản phẩm</label>
+          <input id="sp_hinhanhlienquan" type="file" name="sp_hinhanhlienquan[]" multiple>
+      </div>
+      </div>
     <button> Lưu</button>
 </form>
 @endsection
@@ -86,8 +89,25 @@
             showCaption: false,
             browseClass: "btn btn-primary btn-lg",
             fileType: "any",
+            append: false,
+            showRemove: false,
+            autoReplace: true,
             previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-            overwriteInitial: false
+            overwriteInitial: false,
+            initialPreviewShowDelete: false,
+            initialPreviewAsData: true,
+            initialPreview: [
+                "{{ asset('storage/photos/' . $sp->sp_hinh) }}"
+            ],
+            initialPreviewConfig: [
+                {
+                    caption: "{{ $sp->sp_hinh }}", 
+                    size: {{ Storage::exists('public/photos/' . $sp->sp_hinh) ? Storage::size('public/photos/' . $sp->sp_hinh) : 0 }}, 
+                    width: "120px", 
+                    url: "{$url}", 
+                    key: 1
+                },
+            ]
         });
         $("#sp_hinhanhlienquan").fileinput({
             theme: 'fas',
@@ -95,12 +115,33 @@
             showCaption: false,
             browseClass: "btn btn-primary btn-lg",
             fileType: "any",
+            append: false,
+            showRemove: false,
+            autoReplace: true,
             previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
             overwriteInitial: false,
-            allowedFileExtensions: ["jpg", "gif", "png", "txt"]
+            allowedFileExtensions: ["jpg", "gif", "png", "txt"],
+            initialPreviewShowDelete: false,
+            initialPreviewAsData: true,
+            initialPreview: [
+                @foreach($sp->hinhanhlienquan()->get() as $hinhAnh)
+                "{{ asset('storage/photos/' . $hinhAnh->ha_ten) }}",
+                @endforeach
+            ],
+            initialPreviewConfig: [
+                @foreach($sp->hinhanhlienquan()->get() as $index=>$hinhAnh)
+                {
+                    caption: "{{ $hinhAnh->ha_ten }}", 
+                    size: {{ Storage::exists('public/photos/' . $hinhAnh->ha_ten) ? Storage::size('public/photos/' . $hinhAnh->ha_ten) : 0 }}, 
+                    width: "120px", 
+                    url: "{$url}", 
+                    key: {{ ($index + 1) }}
+                },
+                @endforeach
+            ]
+        });
     });
-    });
-    </script>
+</script>
     <!-- Các script dành cho thư viện Mặt nạ nhập liệu InputMask -->
     <script src="{{ asset('vendor/input-mask/jquery.inputmask.min.js') }}"></script>
     <script src="{{ asset('vendor/input-mask/bindings/inputmask.binding.js') }}"></script>

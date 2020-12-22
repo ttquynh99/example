@@ -22,7 +22,7 @@
     <!-- End Navbar -->
 
     <!-- Main content -->
-    <div class="container-fluid" style="margin : 80px">
+    <div class="container-fluid" style="margin-top : 70px">
         <div class="row">
             <!-- Sidebar -->
             @include('backend.layouts.partials.sidebar')

@@ -21,4 +21,9 @@ class Sanpham extends Model
     public function loaisp(){
         return $this->belongsTo('App\Loai','l_ma','l_ma');
     }
+
+    public function hinhanhlienquan()
+    {
+        return $this->hasMany('App\Hinhanh', 'sp_ma', 'sp_ma');
+    }
 }
