@@ -45,6 +45,9 @@ Route::delete('admin/loai/delete/{id}','Backend\LoaiController@destroy')->name('
 
 
 //Route sản phẩm
+Route::get('/admin/sanpham/print', 'Backend\SanphamController@print')->name('admin.sanpham.print');
+Route::get('/admin/sanpham/excel', 'Backend\SanphamController@excel')->name('admin.sanpham.excel');
+Route::get('/admin/sanpham/pdf', 'Backend\SanPhamController@pdf')->name('admin.sanpham.pdf');
 
 Route::resource('/admin/sanpham', 'Backend\SanphamController' , ['as' => 'admin']);
 
@@ -52,3 +55,14 @@ Route::resource('/admin/sanpham', 'Backend\SanphamController' , ['as' => 'admin'
 //Route xuất xứ
 
 Route::resource('/admin/xuatxu', 'Backend\XuatxuController' , ['as' => 'admin']);
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+
+Route::get('/test', function() {
+    return bcrypt('12345');
+});

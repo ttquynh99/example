@@ -12,6 +12,11 @@
 </style>
 
 @endsection
+
+
+
+
+
 @section('content')
 @if(Session::has('alert-info'))
     <div class="alert alert-success" role="alert">
@@ -21,6 +26,9 @@
 
     <table class="table table-bordered">
     <a class="btn btn-primary" href="{{route('admin.sanpham.create')}}"> Thêm mới</a>
+    <a class="btn btn-success" href="{{route('admin.sanpham.print')}}"> In</a>
+    <a href="{{ route('admin.sanpham.excel') }}" class="btn btn-primary">Xuất Excel</a>
+    <a href="{{ route('admin.sanpham.pdf') }}" class="btn btn-success">Xuất PDF</a>
     <tr>
         <td>Mã</td>
         <td>Tên</td>
