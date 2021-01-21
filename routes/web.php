@@ -66,3 +66,20 @@ Auth::routes();
 Route::get('/test', function() {
     return bcrypt('12345');
 });
+
+
+Route::get('/lien-he','Frontend\FrontendController@contact')->name('frontend.contact');
+
+Route::post('/lien-he/goi-loi-nhan', 'Frontend\FrontendController@sendMailContactForm')->name('frontend.contact.sendMailContactForm');
+
+Route::get('setLocale/{locale}', function ($locale) {
+    if (in_array($locale, Config::get('app.locales'))) {
+      Session::put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('app.setLocale');
+
+
+// Tạo route Báo cáo Đơn hàng
+Route::get('/admin/baocao/donhang', 'Backend\BaoCaoController@donhang')->name('backend.baocao.donhang');
+Route::get('/admin/baocao/donhang/data', 'Backend\BaoCaoController@donhangData')->name('backend.baocao.donhang.data');
